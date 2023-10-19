@@ -15,6 +15,8 @@
 		5B005EF12AE0FA3C00ABDC24 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B005EF02AE0FA3C00ABDC24 /* Task.swift */; };
 		5B005EF42AE0FD6600ABDC24 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B005EF32AE0FD6600ABDC24 /* MainView.swift */; };
 		5B005EF72AE0FEF700ABDC24 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B005EF62AE0FEF700ABDC24 /* TodayView.swift */; };
+		5B67BCE82AE157D50092FDAE /* PreviousDaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B67BCE72AE157D50092FDAE /* PreviousDaysView.swift */; };
+		5B67BCEA2AE15AB20092FDAE /* Widgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B67BCE92AE15AB20092FDAE /* Widgets.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		5B005EF02AE0FA3C00ABDC24 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		5B005EF32AE0FD6600ABDC24 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		5B005EF62AE0FEF700ABDC24 /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
+		5B67BCE72AE157D50092FDAE /* PreviousDaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviousDaysView.swift; sourceTree = "<group>"; };
+		5B67BCE92AE15AB20092FDAE /* Widgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Widgets.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +97,8 @@
 			children = (
 				5B005EF32AE0FD6600ABDC24 /* MainView.swift */,
 				5B005EF62AE0FEF700ABDC24 /* TodayView.swift */,
+				5B67BCE72AE157D50092FDAE /* PreviousDaysView.swift */,
+				5B67BCE92AE15AB20092FDAE /* Widgets.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -173,6 +179,8 @@
 				5B005EF42AE0FD6600ABDC24 /* MainView.swift in Sources */,
 				5B005EF72AE0FEF700ABDC24 /* TodayView.swift in Sources */,
 				5B005EE02AE0F1CB00ABDC24 /* MasonApp.swift in Sources */,
+				5B67BCE82AE157D50092FDAE /* PreviousDaysView.swift in Sources */,
+				5B67BCEA2AE15AB20092FDAE /* Widgets.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

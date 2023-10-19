@@ -26,6 +26,10 @@ struct ContentView: View {
                 .tabItem {
                     Label("Today", systemImage: "sunrise")
                 }
+            PreviousDaysView()
+                .tabItem {
+                    Label("Previous", systemImage: "arrowshape.turn.up.backward")
+                }
         }
     }
 }

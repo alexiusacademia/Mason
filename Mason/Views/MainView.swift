@@ -15,9 +15,14 @@ struct MainView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    Text("Mason")
-                        .font(.title)
-                        .bold()
+                    TopBarTitleWidget()
+                }
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        
+                    }label: {
+                        Image(systemName: "plus")
+                    }
                 }
             }
         }
