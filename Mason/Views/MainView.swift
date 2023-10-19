@@ -12,14 +12,21 @@ struct MainView: View {
         NavigationStack {
             ScrollView {
                 VStack {
-                    SummaryTile(title: "Today", subtitle: "10", bgColor: Color.orange.opacity(0.5))
-                        .padding()
+                    NavigationLink(destination: TodayView()) {
+                        SummaryTile(title: "Today", subtitle: "10", bgColor: Color.orange.opacity(0.5))
+                            .padding()
+                    }
                     
-                    SummaryTile(title: "Previous", subtitle: "14", bgColor: Color.blue.opacity(0.5))
-                        .padding()
+                    NavigationLink(destination: PreviousDaysView()) {
+                        SummaryTile(title: "Previous", subtitle: "14", bgColor: Color.blue.opacity(0.5))
+                            .padding()
+                    }
                     
-                    SummaryTile(title: "Weekly", subtitle: "35", bgColor: Color.green.opacity(0.5))
-                        .padding()
+                    NavigationLink(destination: WeeklyView()) {
+                        SummaryTile(title: "Weekly", subtitle: "35", bgColor: Color.green.opacity(0.5))
+                            .padding()
+                    }
+                    
                 }
             }
             .toolbar {
