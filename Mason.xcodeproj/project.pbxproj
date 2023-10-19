@@ -70,7 +70,6 @@
 				5B005EF52AE0FEAD00ABDC24 /* Views */,
 				5B005EF22AE0FA4400ABDC24 /* Models */,
 				5B005EDF2AE0F1CB00ABDC24 /* MasonApp.swift */,
-				5B005EE12AE0F1CB00ABDC24 /* ContentView.swift */,
 				5B005EE32AE0F1CB00ABDC24 /* Item.swift */,
 				5B005EE52AE0F1CC00ABDC24 /* Assets.xcassets */,
 				5B005EE72AE0F1CC00ABDC24 /* Preview Content */,
@@ -97,6 +96,7 @@
 		5B005EF52AE0FEAD00ABDC24 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				5B005EE12AE0F1CB00ABDC24 /* ContentView.swift */,
 				5B005EF32AE0FD6600ABDC24 /* MainView.swift */,
 				5B005EF62AE0FEF700ABDC24 /* TodayView.swift */,
 				5B67BCE72AE157D50092FDAE /* PreviousDaysView.swift */,
