@@ -30,6 +30,10 @@ struct ContentView: View {
                 .tabItem {
                     Label("Previous", systemImage: "arrowshape.turn.up.backward")
                 }
+            WeeklyView()
+                .tabItem {
+                    Label("Weekly", systemImage: "calendar")
+                }
         }
     }
 }
