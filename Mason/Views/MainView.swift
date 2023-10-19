@@ -8,25 +8,32 @@
 import SwiftUI
 
 struct MainView: View {
+    @Binding var selectedTab: Tag
+    
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack {
-                    NavigationLink(destination: TodayView()) {
+                    Button {
+                        selectedTab = Tag.today
+                    }label: {
                         SummaryTile(title: "Today", subtitle: "10", bgColor: Color.orange.opacity(0.5))
                             .padding()
                     }
                     
-                    NavigationLink(destination: PreviousDaysView()) {
+                    Button {
+                        selectedTab = Tag.previous
+                    }label: {
                         SummaryTile(title: "Previous", subtitle: "14", bgColor: Color.blue.opacity(0.5))
                             .padding()
                     }
                     
-                    NavigationLink(destination: WeeklyView()) {
+                    Button {
+                        selectedTab = Tag.weekly
+                    }label: {
                         SummaryTile(title: "Weekly", subtitle: "35", bgColor: Color.green.opacity(0.5))
                             .padding()
                     }
-                    
                 }
             }
             .toolbar {

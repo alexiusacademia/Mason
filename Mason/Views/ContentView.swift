@@ -8,11 +8,11 @@
 import SwiftUI
 import SwiftData
 
-enum Tag {
-    case main
-    case today
-    case previous
-    case weekly
+enum Tag: String {
+    case main = "main"
+    case today = "today"
+    case previous = "previous"
+    case weekly = "weekly"
 }
 
 struct ContentView: View {
@@ -23,7 +23,7 @@ struct ContentView: View {
 
     var body: some View {
         TabView(selection: $selectedTab) {
-            MainView()
+            MainView(selectedTab: $selectedTab)
                 .tabItem {
                     Label("Home", systemImage: "house")
                         .overlay {
@@ -31,15 +31,18 @@ struct ContentView: View {
                                 .stroke(lineWidth: 1.0)
                         }
                 }.tag(Tag.main)
+            
             TodayView()
                 .tabItem {
                     Label("Today", systemImage: "sunrise")
                 }
                 .tag(Tag.today)
+            
             PreviousDaysView()
                 .tabItem {
                     Label("Previous", systemImage: "arrowshape.turn.up.backward")
                 }.tag(Tag.previous)
+           
             WeeklyView()
                 .tabItem {
                     Label("Weekly", systemImage: "calendar")

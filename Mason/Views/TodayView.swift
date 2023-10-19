@@ -23,8 +23,6 @@ struct TodayView: View {
                 }
             }
             .navigationTitle("Today")
-            
         }
-        
     }
 }
