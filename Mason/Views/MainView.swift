@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct MainView: View {
     @Binding var selectedTab: Tag
+    @Query private var tasks: [Task]
     
     var body: some View {
         NavigationStack {
@@ -48,6 +50,8 @@ struct MainView: View {
                     }
                 }
             }
+        }.onAppear() {
+            print(tasks)
         }
     }
 }
