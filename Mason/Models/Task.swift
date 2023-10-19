@@ -6,9 +6,9 @@
 //
 
 import Foundation
-import SwiftUI
+import SwiftData
 
-
+@Model
 class Task {
     var timestamp: Date
     var taskName: String
