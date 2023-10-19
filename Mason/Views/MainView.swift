@@ -10,8 +10,17 @@ import SwiftUI
 struct MainView: View {
     var body: some View {
         NavigationStack {
-            List {
-                Text("Test")
+            ScrollView {
+                VStack {
+                    SummaryTile(title: "Today", subtitle: "10", bgColor: Color.orange.opacity(0.5))
+                        .padding()
+                    
+                    SummaryTile(title: "Previous", subtitle: "14", bgColor: Color.blue.opacity(0.5))
+                        .padding()
+                    
+                    SummaryTile(title: "Weekly", subtitle: "35", bgColor: Color.green.opacity(0.5))
+                        .padding()
+                }
             }
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
