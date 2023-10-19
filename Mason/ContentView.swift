@@ -22,6 +22,10 @@ struct ContentView: View {
                                 .stroke(lineWidth: 1.0)
                         }
                 }
+            TodayView()
+                .tabItem {
+                    Label("Today", systemImage: "sunrise")
+                }
         }
     }
 }

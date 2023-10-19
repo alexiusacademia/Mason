@@ -14,6 +14,7 @@
 		5B005EE92AE0F1CC00ABDC24 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B005EE82AE0F1CC00ABDC24 /* Preview Assets.xcassets */; };
 		5B005EF12AE0FA3C00ABDC24 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B005EF02AE0FA3C00ABDC24 /* Task.swift */; };
 		5B005EF42AE0FD6600ABDC24 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B005EF32AE0FD6600ABDC24 /* MainView.swift */; };
+		5B005EF72AE0FEF700ABDC24 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B005EF62AE0FEF700ABDC24 /* TodayView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		5B005EEF2AE0F1FA00ABDC24 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		5B005EF02AE0FA3C00ABDC24 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		5B005EF32AE0FD6600ABDC24 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		5B005EF62AE0FEF700ABDC24 /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				5B005EF32AE0FD6600ABDC24 /* MainView.swift */,
+				5B005EF62AE0FEF700ABDC24 /* TodayView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -168,6 +171,7 @@
 				5B005EE22AE0F1CB00ABDC24 /* ContentView.swift in Sources */,
 				5B005EE42AE0F1CB00ABDC24 /* Item.swift in Sources */,
 				5B005EF42AE0FD6600ABDC24 /* MainView.swift in Sources */,
+				5B005EF72AE0FEF700ABDC24 /* TodayView.swift in Sources */,
 				5B005EE02AE0F1CB00ABDC24 /* MasonApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
