@@ -10,17 +10,20 @@ import SwiftUI
 struct WeeklyView: View {
     var body: some View {
         NavigationStack {
-            List {
+            ZStack {
+                Color.green.opacity(0.3).ignoresSafeArea()
                 
-            }.toolbar {
+                List {
+                    
+                }.scrollContentBackground(.hidden)
+            }
+            .toolbar {
                 ToolbarItem {
                     TopBarTitleWidget()
                 }
             }
+            .navigationTitle("Weekly")
         }
+        
     }
-}
-
-#Preview {
-    WeeklyView()
 }

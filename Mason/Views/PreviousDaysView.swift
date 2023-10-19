@@ -10,9 +10,17 @@ import SwiftUI
 struct PreviousDaysView: View {
     var body: some View {
         NavigationStack {
-            List {
+            ZStack {
+                Color.blue.opacity(0.3).ignoresSafeArea()
                 
-            }.navigationTitle("Previous Days")
+                List {
+                    
+                }.scrollContentBackground(.hidden)
+            }.toolbar {
+                ToolbarItem {
+                    TopBarTitleWidget()
+                }
+            }.navigationTitle("Previous")
         }
     }
 }

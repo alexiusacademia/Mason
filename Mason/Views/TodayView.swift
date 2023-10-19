@@ -10,9 +10,19 @@ import SwiftUI
 struct TodayView: View {
     var body: some View {
         NavigationStack {
-            VStack {
+            ZStack {
+                Color.orange.opacity(0.3).ignoresSafeArea()
                 
-            }.navigationTitle("Today")
+                List {
+                    
+                }.scrollContentBackground(.hidden)
+            }
+            .toolbar {
+                ToolbarItem {
+                    TopBarTitleWidget()
+                }
+            }
+            .navigationTitle("Today")
             
         }
         
