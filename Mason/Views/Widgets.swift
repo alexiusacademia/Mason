@@ -45,18 +45,35 @@ struct SummaryTile: View {
 
 struct TaskRow: View {
     @Bindable var task: Task
+    @State var showDate = false
+    @State var date = ""
     
     var body: some View {
-        HStack {
-            Button {
-                task.completed = !task.completed
-            }label: {
-                Image(systemName: task.completed ? "checkmark.square" : "square")
-            }
+        VStack {
+            HStack {
+                Button {
+                    task.completed = !task.completed
+                }label: {
+                    Image(systemName: task.completed ? "checkmark.square" : "square")
+                }
+                
+                Text(task.taskName)
+                    .bold()
+                    .foregroundStyle(task.completed ? .green.opacity(0.8) : .black)
+            }.frame(maxWidth: .infinity, alignment: .leading)
             
-            Text(task.taskName)
-                .bold()
-                .foregroundStyle(task.completed ? .green.opacity(0.8) : .black)
+            if showDate {
+                Text(date)
+                    .font(.subheadline)
+                    .foregroundStyle(.gray.opacity(0.75))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
+        }
+        .onAppear() {
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MMM dd, yyyy"
+            date = dateFormatter.string(from: task.timestamp)
         }
     }
 }

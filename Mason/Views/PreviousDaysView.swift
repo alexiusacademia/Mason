@@ -20,7 +20,7 @@ struct PreviousDaysView: View {
                 
                 List {
                     ForEach(items) {task in
-                        TaskRow(task: task)
+                        TaskRow(task: task, showDate: true)
                     }
                 }.scrollContentBackground(.hidden)
             }.toolbar {
