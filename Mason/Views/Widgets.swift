@@ -22,18 +22,20 @@ struct TopBarTitleWidget: View {
 
 struct SummaryTile: View {
     @State var title: String
-    @State var subtitle: String
+    @Binding var subtitle: String
     @State var bgColor: Color
     
     var body: some View {
         VStack {
             Text(title)
                 .font(.largeTitle)
-                .bold()
+                .fontWeight(.light)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding()
             Text(subtitle)
-                .font(.title)
+                .font(.largeTitle)
+                .fontWeight(.black)
+                .bold()
                 .padding()
         }
         .background(

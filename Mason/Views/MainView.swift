@@ -14,6 +14,10 @@ struct MainView: View {
     
     @State private var showAddTaskDialog = false
     
+    @State var todayTasks = "0"
+    @State var previousIncompleteTasks = "0"
+    @State var weeklyTasks = "0"
+    
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -21,21 +25,21 @@ struct MainView: View {
                     Button {
                         selectedTab = Tag.today
                     }label: {
-                        SummaryTile(title: "Today", subtitle: "10", bgColor: Color.orange.opacity(0.5))
+                        SummaryTile(title: "Today", subtitle: $todayTasks, bgColor: Color.orange.opacity(0.5))
                             .padding()
                     }
                     
                     Button {
                         selectedTab = Tag.previous
                     }label: {
-                        SummaryTile(title: "Previous", subtitle: "14", bgColor: Color.blue.opacity(0.5))
+                        SummaryTile(title: "Previous", subtitle: $previousIncompleteTasks, bgColor: Color.blue.opacity(0.5))
                             .padding()
                     }
                     
                     Button {
                         selectedTab = Tag.weekly
                     }label: {
-                        SummaryTile(title: "Weekly", subtitle: "35", bgColor: Color.green.opacity(0.5))
+                        SummaryTile(title: "Weekly", subtitle: $weeklyTasks, bgColor: Color.green.opacity(0.5))
                             .padding()
                     }
                 }
@@ -55,9 +59,38 @@ struct MainView: View {
                 AddTaskDialogView(showMe: $showAddTaskDialog)
             })
         }.onAppear() {
+            var today = 0
+            var previousIncomplete = 0
+            var weeklyTasks = 0
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd.MM.yyyy"
+            let now = dateFormatter.string(from: Date.now)
+            
             for task in tasks {
-                print("\(task.taskName) on \(task.timestamp)")
+                let taskDate = dateFormatter.string(from: task.timestamp)
+                
+                if taskDate == now {
+                    today += 1
+                }
+                
+                if !Calendar.current.isDateInToday(task.timestamp) {
+                    if taskDate < now && !task.completed {
+                        previousIncomplete += 1
+                    }
+                }
+                
+                let currentDate = Date.now
+                let currentWeek = Calendar.current.component(.weekOfYear, from: currentDate)
+                
+                if Calendar.current.component(.weekOfYear, from: task.timestamp) == currentWeek {
+                    weeklyTasks += 1
+                }
             }
+
+            self.todayTasks = String(today)
+            self.previousIncompleteTasks = String(previousIncomplete)
+            self.weeklyTasks = String(weeklyTasks)
         }
     }
 }
