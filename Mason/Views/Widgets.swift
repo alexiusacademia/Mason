@@ -20,6 +20,12 @@ struct TopBarTitleWidget: View {
     }
 }
 
+extension String {
+    var isInt: Bool {
+        return Int(self) != nil
+    }
+}
+
 struct SummaryTile: View {
     @State var title: String
     @Binding var subtitle: String
@@ -33,7 +39,7 @@ struct SummaryTile: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding()
             Text(subtitle)
-                .font(.largeTitle)
+                .font(subtitle.isInt ? .largeTitle : .headline)
                 .fontWeight(.black)
                 .bold()
                 .padding()
