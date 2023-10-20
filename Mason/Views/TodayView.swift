@@ -22,15 +22,20 @@ struct TodayView: View {
             ZStack {
                 Color.orange.opacity(0.3).ignoresSafeArea()
                 
-                List {
-                    ForEach(items) { task in
-                        TaskRow(task: task)
-                    }
-                    .onDelete(perform: deleteItems)
-                }.scrollContentBackground(.hidden)
-                    .onChange(of: tasks, {oldValue, newValue in
-                        updateItems()
-                    })
+                if items.count == 0 {
+                    Text("No activities for today.")
+                } else {
+                    List {
+                        ForEach(items) { task in
+                            TaskRow(task: task)
+                        }
+                        .onDelete(perform: deleteItems)
+                    }.scrollContentBackground(.hidden)
+                        .onChange(of: tasks, {oldValue, newValue in
+                            updateItems()
+                        })
+                }
+                
             }
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
