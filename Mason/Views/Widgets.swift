@@ -42,3 +42,21 @@ struct SummaryTile: View {
         )
     }
 }
+
+struct TaskRow: View {
+    @Bindable var task: Task
+    
+    var body: some View {
+        HStack {
+            Button {
+                task.completed = !task.completed
+            }label: {
+                Image(systemName: task.completed ? "checkmark.square" : "square")
+            }
+            
+            Text(task.taskName)
+                .bold()
+                .foregroundStyle(task.completed ? .green.opacity(0.8) : .black)
+        }
+    }
+}
