@@ -10,6 +10,7 @@ import SwiftData
 
 struct TodayView: View {
     @Environment(\.modelContext) private var modelContext
+    
     @Query private var tasks: [Task]
     
     @State private var items: [Task] = []
@@ -20,7 +21,7 @@ struct TodayView: View {
                 Color.orange.opacity(0.3).ignoresSafeArea()
                 
                 List {
-                    ForEach(tasks) { task in
+                    ForEach(items) { task in
                         TaskRow(task: task)
                     }
                     .onDelete(perform: deleteItems)
@@ -33,8 +34,15 @@ struct TodayView: View {
             }
             .navigationTitle("Today")
         }.onAppear() {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd.MM.yyyy"
+            
+            let now = dateFormatter.string(from: Date.now)
+            
             for task in tasks {
-                if task.timestamp == .now {
+                let taskDate = dateFormatter.string(from: task.timestamp)
+                
+                if taskDate == now {
                     items.append(task)
                 }
             }
