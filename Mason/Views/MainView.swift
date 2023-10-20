@@ -12,6 +12,8 @@ struct MainView: View {
     @Binding var selectedTab: Tag
     @Query private var tasks: [Task]
     
+    @State private var showAddTaskDialog = false
+    
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -44,14 +46,54 @@ struct MainView: View {
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                        
+                        showAddTaskDialog = true
                     }label: {
                         Image(systemName: "plus")
                     }
                 }
-            }
+            }.sheet(isPresented: $showAddTaskDialog, content: {
+                AddTaskDialogView(showMe: $showAddTaskDialog)
+            })
         }.onAppear() {
-            print(tasks)
+            for task in tasks {
+                print("\(task.taskName) on \(task.timestamp)")
+            }
+        }
+    }
+}
+
+struct AddTaskDialogView: View {
+    @Environment(\.modelContext) private var modelContext
+    @State private var date: Date = .now
+    @State private var taskName = "Sample Task"
+    
+    @State private var showAlert = false
+    
+    @Binding var showMe: Bool
+    
+    var body: some View {
+        Form {
+            DatePicker("Date", 
+                       selection: $date,
+                       displayedComponents: [.date])
+            
+            TextField("Task Name", text: $taskName)
+            
+            Button {
+                withAnimation {
+                    let newTask = Task(timestamp: date, taskName: taskName)
+                    modelContext.insert(newTask)
+                    
+                    showAlert = true
+                }
+            }label: {
+                Text("Add Task")
+            }
+        }
+        .alert("Task saved successfully!", isPresented: $showAlert) {
+            Button("OK", role: .cancel) {
+                showMe = false
+            }
         }
     }
 }
