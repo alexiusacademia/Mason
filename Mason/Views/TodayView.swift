@@ -18,9 +18,10 @@ struct TodayView: View {
             ZStack {
                 Color.orange.opacity(0.3).ignoresSafeArea()
                 
-                List(tasks, id: \.self) { task in
-                    Text(task.taskName)
-                        .bold()
+                List {
+                    ForEach(tasks) { task in
+                        TaskRow(task: task)
+                    }
                 }.scrollContentBackground(.hidden)
             }
             .toolbar {
