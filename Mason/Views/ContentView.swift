@@ -17,7 +17,7 @@ enum Tag: String {
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
+    @Query(sort: \Task.timestamp, order: .reverse) private var items: [Item]
     
     @State private var selectedTab = Tag.main
 
