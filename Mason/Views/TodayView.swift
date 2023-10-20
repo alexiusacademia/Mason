@@ -8,12 +8,14 @@
 import SwiftUI
 import SwiftData
 
+
 struct TodayView: View {
     @Environment(\.modelContext) private var modelContext
     
     @Query private var tasks: [Task]
     
     @State private var items: [Task] = []
+    @State private var showAddTaskDialog = false
     
     var body: some View {
         NavigationStack {
@@ -28,38 +30,50 @@ struct TodayView: View {
                 }.scrollContentBackground(.hidden)
             }
             .toolbar {
-                ToolbarItem {
+                ToolbarItem(placement: .topBarLeading) {
                     TopBarTitleWidget()
                 }
-            }
+                
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        showAddTaskDialog = true
+                    }label: {
+                        Image(systemName: "plus")
+                    }
+                }
+            }.sheet(isPresented: $showAddTaskDialog, content: {
+                AddTaskDialogView(showMe: $showAddTaskDialog)
+            })
             .navigationTitle("Today")
         }.onAppear() {
-            items = []
+            updateItems()
+        }
+    }
+    
+    private func updateItems() {
+        items = []
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd.MM.yyyy"
+        
+        let now = dateFormatter.string(from: Date.now)
+        
+        for task in tasks {
+            let taskDate = dateFormatter.string(from: task.timestamp)
             
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "dd.MM.yyyy"
-            
-            let now = dateFormatter.string(from: Date.now)
-            
-            for task in tasks {
-                let taskDate = dateFormatter.string(from: task.timestamp)
-                
-                if taskDate == now {
-                    items.append(task)
-                }
+            if taskDate == now {
+                items.append(task)
             }
         }
     }
     
     private func deleteItems(offsets: IndexSet) {
+        withAnimation {
             for index in offsets {
-                print(index)
-            }
+                let task = (items[index])
             
-            withAnimation {
-                for index in offsets {
-                    modelContext.delete(tasks[index])
-                }
+                modelContext.delete(task)
             }
         }
+    }
 }

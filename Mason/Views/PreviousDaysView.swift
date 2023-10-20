@@ -18,11 +18,15 @@ struct PreviousDaysView: View {
             ZStack {
                 Color.blue.opacity(0.3).ignoresSafeArea()
                 
-                List {
-                    ForEach(items) {task in
-                        TaskRow(task: task, showDate: true)
-                    }
-                }.scrollContentBackground(.hidden)
+                if items.count == 0 {
+                    Text("No previous prending tasks.")
+                } else {
+                    List {
+                        ForEach(items) {task in
+                            TaskRow(task: task, showDate: true)
+                        }
+                    }.scrollContentBackground(.hidden)
+                }
             }.toolbar {
                 ToolbarItem {
                     TopBarTitleWidget()

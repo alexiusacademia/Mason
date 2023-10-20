@@ -89,7 +89,7 @@ struct MainView: View {
             }
 
             self.todayTasks = String(today)
-            self.previousIncompleteTasks = String(previousIncomplete)
+            self.previousIncompleteTasks = previousIncomplete == 0 ? "No pending previous tasks." : String(previousIncomplete)
             self.weeklyTasks = String(weeklyTasks)
         }
     }
