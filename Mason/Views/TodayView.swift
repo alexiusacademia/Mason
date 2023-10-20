@@ -6,15 +6,21 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct TodayView: View {
+    @Query private var tasks: [Task]
+    
+    @State private var items: [Task] = []
+    
     var body: some View {
         NavigationStack {
             ZStack {
                 Color.orange.opacity(0.3).ignoresSafeArea()
                 
-                List {
-                    
+                List(tasks, id: \.self) { task in
+                    Text(task.taskName)
+                        .bold()
                 }.scrollContentBackground(.hidden)
             }
             .toolbar {
@@ -23,6 +29,12 @@ struct TodayView: View {
                 }
             }
             .navigationTitle("Today")
+        }.onAppear() {
+            for task in tasks {
+                if task.timestamp == .now {
+                    items.append(task)
+                }
+            }
         }
     }
 }
