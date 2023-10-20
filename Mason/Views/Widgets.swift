@@ -40,9 +40,5 @@ struct SummaryTile: View {
             RoundedRectangle(cornerRadius: 25.0, style: .continuous).fill(bgColor)
             
         )
-        .overlay (
-            RoundedRectangle(cornerRadius: 25.0)
-                .stroke(lineWidth: 2.0)
-        )
     }
 }
