@@ -28,6 +28,9 @@ struct TodayView: View {
                     }
                     .onDelete(perform: deleteItems)
                 }.scrollContentBackground(.hidden)
+                    .onChange(of: tasks, {oldValue, newValue in
+                        updateItems()
+                    })
             }
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
@@ -37,6 +40,8 @@ struct TodayView: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         showAddTaskDialog = true
+                        
+                        updateItems()
                     }label: {
                         Image(systemName: "plus")
                     }
@@ -65,13 +70,14 @@ struct TodayView: View {
                 items.append(task)
             }
         }
+        
     }
     
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
             for index in offsets {
                 let task = (items[index])
-            
+                
                 modelContext.delete(task)
             }
         }
