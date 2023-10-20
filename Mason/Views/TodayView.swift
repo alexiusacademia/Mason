@@ -34,6 +34,8 @@ struct TodayView: View {
             }
             .navigationTitle("Today")
         }.onAppear() {
+            items = []
+            
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "dd.MM.yyyy"
             
