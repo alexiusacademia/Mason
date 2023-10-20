@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct TodayView: View {
+    @Environment(\.modelContext) private var modelContext
     @Query private var tasks: [Task]
     
     @State private var items: [Task] = []
@@ -22,6 +23,7 @@ struct TodayView: View {
                     ForEach(tasks) { task in
                         TaskRow(task: task)
                     }
+                    .onDelete(perform: deleteItems)
                 }.scrollContentBackground(.hidden)
             }
             .toolbar {
@@ -38,4 +40,16 @@ struct TodayView: View {
             }
         }
     }
+    
+    private func deleteItems(offsets: IndexSet) {
+            for index in offsets {
+                print(index)
+            }
+            
+            withAnimation {
+                for index in offsets {
+                    modelContext.delete(tasks[index])
+                }
+            }
+        }
 }
