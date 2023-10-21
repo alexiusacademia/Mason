@@ -42,7 +42,9 @@ struct MainView: View {
                         SummaryTile(title: "Weekly", subtitle: $weeklyTasks, bgColor: Color.green.opacity(0.5))
                             .padding()
                     }
-                }
+                }.onChange(of: tasks, {oldValue, newValue in
+                    updateData()
+                })
             }
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
@@ -59,38 +61,42 @@ struct MainView: View {
                 AddTaskDialogView(showMe: $showAddTaskDialog)
             })
         }.onAppear() {
-            var today = 0
-            var previousIncomplete = 0
-            var weeklyTasks = 0
+            updateData()
+        }
+    }
+    
+    private func updateData() {
+        var today = 0
+        var previousIncomplete = 0
+        var weeklyTasks = 0
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd.MM.yyyy"
+        let now = dateFormatter.string(from: Date.now)
+        
+        for task in tasks {
+            let taskDate = dateFormatter.string(from: task.timestamp)
             
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "dd.MM.yyyy"
-            let now = dateFormatter.string(from: Date.now)
+            if taskDate == now {
+                today += 1
+            }
             
-            for task in tasks {
-                let taskDate = dateFormatter.string(from: task.timestamp)
-                
-                if taskDate == now {
-                    today += 1
-                }
-                
-                if !Calendar.current.isDateInToday(task.timestamp) {
-                    if taskDate < now && !task.completed {
-                        previousIncomplete += 1
-                    }
-                }
-                
-                let currentDate = Date.now
-                let currentWeek = Calendar.current.component(.weekOfYear, from: currentDate)
-                
-                if Calendar.current.component(.weekOfYear, from: task.timestamp) == currentWeek {
-                    weeklyTasks += 1
+            if !Calendar.current.isDateInToday(task.timestamp) {
+                if taskDate < now && !task.completed {
+                    previousIncomplete += 1
                 }
             }
-
-            self.todayTasks = today == 0 ? "No tasks for today." : String(today)
-            self.previousIncompleteTasks = previousIncomplete == 0 ? "No pending previous tasks." : String(previousIncomplete)
-            self.weeklyTasks = weeklyTasks == 0 ? "No tasks for this week" :  String(weeklyTasks)
+            
+            let currentDate = Date.now
+            let currentWeek = Calendar.current.component(.weekOfYear, from: currentDate)
+            
+            if Calendar.current.component(.weekOfYear, from: task.timestamp) == currentWeek {
+                weeklyTasks += 1
+            }
         }
+
+        self.todayTasks = today == 0 ? "No tasks for today." : String(today)
+        self.previousIncompleteTasks = previousIncomplete == 0 ? "No pending previous tasks." : String(previousIncomplete)
+        self.weeklyTasks = weeklyTasks == 0 ? "No tasks for this week" :  String(weeklyTasks)
     }
 }
