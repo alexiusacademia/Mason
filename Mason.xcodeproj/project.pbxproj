@@ -20,6 +20,7 @@
 		5B67BCEE2AE15C6D0092FDAE /* WeeklyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B67BCED2AE15C6D0092FDAE /* WeeklyView.swift */; };
 		5BA624E72AE2C7630062FB65 /* Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA624E62AE2C7630062FB65 /* Alerts.swift */; };
 		5BA624E92AE2C7810062FB65 /* Dialogs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA624E82AE2C7810062FB65 /* Dialogs.swift */; };
+		5BA624EB2AE4AFBA0062FB65 /* Launchscreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA624EA2AE4AFBA0062FB65 /* Launchscreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		5B67BCED2AE15C6D0092FDAE /* WeeklyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyView.swift; sourceTree = "<group>"; };
 		5BA624E62AE2C7630062FB65 /* Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alerts.swift; sourceTree = "<group>"; };
 		5BA624E82AE2C7810062FB65 /* Dialogs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dialogs.swift; sourceTree = "<group>"; };
+		5BA624EA2AE4AFBA0062FB65 /* Launchscreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Launchscreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 				5B67BCED2AE15C6D0092FDAE /* WeeklyView.swift */,
 				5BA624E62AE2C7630062FB65 /* Alerts.swift */,
 				5BA624E82AE2C7810062FB65 /* Dialogs.swift */,
+				5BA624EA2AE4AFBA0062FB65 /* Launchscreen.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -182,6 +185,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BA624EB2AE4AFBA0062FB65 /* Launchscreen.swift in Sources */,
 				5B005EF12AE0FA3C00ABDC24 /* Task.swift in Sources */,
 				5B005EE22AE0F1CB00ABDC24 /* ContentView.swift in Sources */,
 				5B005EE42AE0F1CB00ABDC24 /* Item.swift in Sources */,
@@ -324,7 +328,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"Mason/Preview Content\"";
 				DEVELOPMENT_TEAM = MGUT6927DK;
 				ENABLE_PREVIEWS = YES;
@@ -340,7 +344,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.syncsoftsolutions.Mason;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -358,7 +362,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"Mason/Preview Content\"";
 				DEVELOPMENT_TEAM = MGUT6927DK;
 				ENABLE_PREVIEWS = YES;
@@ -374,7 +378,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.syncsoftsolutions.Mason;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

@@ -10,6 +10,8 @@ import SwiftData
 
 @main
 struct MasonApp: App {
+    @State private var isActive = false
+    
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Item.self,
@@ -26,7 +28,20 @@ struct MasonApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            VStack {
+                if isActive {
+                    ContentView()
+                } else {
+                    Launchscreen().padding(25.0)
+                }
+            }.onAppear() {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                    withAnimation {
+                        isActive = true
+                    }
+                }
+            }
+            
         }
         .modelContainer(sharedModelContainer)
     }
