@@ -16,6 +16,7 @@ struct TodayView: View {
     
     @State private var items: [Task] = []
     @State private var showAddTaskDialog = false
+    @State private var taskUpdated = 0
     
     var body: some View {
         NavigationStack {
@@ -27,13 +28,21 @@ struct TodayView: View {
                 } else {
                     List {
                         ForEach(items) { task in
-                            TaskRow(task: task)
+                            TaskRow(task: task, taskChange: $taskUpdated)
                         }
                         .onDelete(perform: deleteItems)
                     }.scrollContentBackground(.hidden)
                         .onChange(of: tasks, {oldValue, newValue in
-                            updateItems()
+                            withAnimation {
+                                print("Tasks updated")
+                                updateItems()
+                            }
                         })
+                        .onChange(of: taskUpdated) {old, new in
+                            withAnimation {
+                                updateItems()
+                            }
+                        }
                 }
                 
             }
@@ -72,7 +81,11 @@ struct TodayView: View {
             let taskDate = dateFormatter.string(from: task.timestamp)
             
             if taskDate == now {
-                items.append(task)
+                if task.completed {
+                    items.append(task)
+                } else {
+                    items.insert(task, at: 0)
+                }
             }
         }
         

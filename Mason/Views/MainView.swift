@@ -98,5 +98,7 @@ struct MainView: View {
         self.todayTasks = today == 0 ? "No tasks for today." : String(today)
         self.previousIncompleteTasks = previousIncomplete == 0 ? "No pending previous tasks." : String(previousIncomplete)
         self.weeklyTasks = weeklyTasks == 0 ? "No tasks for this week" :  String(weeklyTasks)
+        
+        
     }
 }

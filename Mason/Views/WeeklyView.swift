@@ -13,6 +13,7 @@ struct WeeklyView: View {
     @Query private var tasks: [Task]
     
     @State private var items: [Task] = []
+    @State private var taskUpdated = 0
     
     var body: some View {
         NavigationStack {
@@ -24,7 +25,7 @@ struct WeeklyView: View {
                 } else {
                     List {
                         ForEach(items) { task in
-                            TaskRow(task: task, showDate: true)
+                            TaskRow(task: task, showDate: true, taskChange: $taskUpdated)
                         }.onDelete(perform: deleteItems)
                     }.scrollContentBackground(.hidden)
                 }

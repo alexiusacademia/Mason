@@ -12,6 +12,7 @@ struct PreviousDaysView: View {
     @Query private var tasks: [Task]
     
     @State private var items: [Task] = []
+    @State private var taskUpdated = 0
     
     var body: some View {
         NavigationStack {
@@ -23,7 +24,7 @@ struct PreviousDaysView: View {
                 } else {
                     List {
                         ForEach(items) {task in
-                            TaskRow(task: task, showDate: true)
+                            TaskRow(task: task, showDate: true, taskChange: $taskUpdated)
                         }
                     }.scrollContentBackground(.hidden)
                 }

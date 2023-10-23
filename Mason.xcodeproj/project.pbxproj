@@ -34,6 +34,8 @@
 		5B005EF02AE0FA3C00ABDC24 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		5B005EF32AE0FD6600ABDC24 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		5B005EF62AE0FEF700ABDC24 /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
+		5B102CB22AE603BD0055ED05 /* Mason.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Mason.entitlements; sourceTree = "<group>"; };
+		5B4BBB012AE6251000DE116C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		5B67BCE72AE157D50092FDAE /* PreviousDaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviousDaysView.swift; sourceTree = "<group>"; };
 		5B67BCE92AE15AB20092FDAE /* Widgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Widgets.swift; sourceTree = "<group>"; };
 		5B67BCED2AE15C6D0092FDAE /* WeeklyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyView.swift; sourceTree = "<group>"; };
@@ -73,6 +75,8 @@
 		5B005EDE2AE0F1CB00ABDC24 /* Mason */ = {
 			isa = PBXGroup;
 			children = (
+				5B4BBB012AE6251000DE116C /* Info.plist */,
+				5B102CB22AE603BD0055ED05 /* Mason.entitlements */,
 				5B005EF52AE0FEAD00ABDC24 /* Views */,
 				5B005EF22AE0FA4400ABDC24 /* Models */,
 				5B005EDF2AE0F1CB00ABDC24 /* MasonApp.swift */,
@@ -327,12 +331,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Mason/Mason.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"Mason/Preview Content\"";
 				DEVELOPMENT_TEAM = MGUT6927DK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Mason/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Mason;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -361,12 +367,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Mason/Mason.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"Mason/Preview Content\"";
 				DEVELOPMENT_TEAM = MGUT6927DK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Mason/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Mason;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

@@ -55,12 +55,14 @@ struct TaskRow: View {
     @Bindable var task: Task
     @State var showDate = false
     @State var date = ""
+    @Binding var taskChange: Int
     
     var body: some View {
         VStack {
             HStack {
                 Button {
                     task.completed = !task.completed
+                    taskChange += 1
                 }label: {
                     Image(systemName: task.completed ? "checkmark.square" : "square")
                 }
