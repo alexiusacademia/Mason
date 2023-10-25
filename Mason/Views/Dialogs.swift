@@ -17,27 +17,33 @@ struct AddTaskDialogView: View {
     @Binding var showMe: Bool
     
     var body: some View {
-        Form {
-            DatePicker("Date",
-                       selection: $date,
-                       displayedComponents: [.date])
+        VStack {
+            Text("Add Task")
+                .font(.title)
+                .padding()
             
-            TextField("Task Name", text: $taskName)
-            
-            Button {
-                withAnimation {
-                    let newTask = Task(timestamp: date, taskName: taskName)
-                    modelContext.insert(newTask)
-                    
-                    showAlert = true
+            Form {
+                DatePicker("Date",
+                           selection: $date,
+                           displayedComponents: [.date])
+                
+                TextField("Task Name", text: $taskName)
+                
+                Button {
+                    withAnimation {
+                        let newTask = Task(timestamp: date, taskName: taskName)
+                        modelContext.insert(newTask)
+                        
+                        showAlert = true
+                    }
+                }label: {
+                    Text("Add Task")
                 }
-            }label: {
-                Text("Add Task")
             }
-        }
-        .alert("Task saved successfully!", isPresented: $showAlert) {
-            Button("OK", role: .cancel) {
-                showMe = false
+            .alert("Task saved successfully!", isPresented: $showAlert) {
+                Button("OK", role: .cancel) {
+                    showMe = false
+                }
             }
         }
     }
