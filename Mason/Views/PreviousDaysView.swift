@@ -25,6 +25,16 @@ struct PreviousDaysView: View {
                     List {
                         ForEach(items) {task in
                             TaskRow(task: task, showDate: true, taskChange: $taskUpdated)
+                                .contextMenu(ContextMenu(menuItems: {
+                                    Button {
+                                        let today = Date.now
+                                        task.timestamp = today
+                                        
+                                        updateItems()
+                                    }label: {
+                                        Label("Move to today", systemImage: "sunrise")
+                                    }
+                                }))
                         }
                     }.scrollContentBackground(.hidden)
                 }
@@ -34,19 +44,23 @@ struct PreviousDaysView: View {
                 }
             }.navigationTitle("Previous")
         }.onAppear() {
-            items = []
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "dd.MM.yyyy"
+            updateItems()
+        }
+    }
+    
+    private func updateItems() {
+        items = []
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd.MM.yyyy"
+        
+        let now = Date.now
+        
+        for task in tasks {
+            let taskDate = task.timestamp
             
-            let now = Date.now
-            
-            for task in tasks {
-                let taskDate = task.timestamp
-                
-                if !Calendar.current.isDateInToday(taskDate) {
-                    if taskDate < now && !task.completed {
-                        items.append(task)
-                    }
+            if !Calendar.current.isDateInToday(taskDate) {
+                if taskDate < now && !task.completed {
+                    items.append(task)
                 }
             }
         }
