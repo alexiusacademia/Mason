@@ -34,7 +34,7 @@ struct TodayView: View {
                     }.scrollContentBackground(.hidden)
                         .onChange(of: tasks, {oldValue, newValue in
                             withAnimation {
-                                print("Tasks updated")
+                                print(tasks.count)
                                 updateItems()
                             }
                         })
@@ -64,8 +64,14 @@ struct TodayView: View {
                 AddTaskDialogView(showMe: $showAddTaskDialog)
             })
             .navigationTitle("Today")
-        }.onAppear() {
+        }
+        .onAppear() {
             updateItems()
+        }
+        .onChange(of: showAddTaskDialog) {
+            withAnimation {
+                updateItems()
+            }
         }
     }
     
