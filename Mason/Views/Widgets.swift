@@ -36,11 +36,13 @@ struct SummaryTile: View {
             Text(title)
                 .font(.largeTitle)
                 .fontWeight(.light)
+                .foregroundStyle(Color.normalText)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding()
             Text(subtitle)
                 .font(subtitle.isInt ? .largeTitle : .headline)
                 .fontWeight(.black)
+                .foregroundStyle(.normalText)
                 .bold()
                 .padding()
         }
@@ -69,7 +71,7 @@ struct TaskRow: View {
                 
                 Text(task.taskName)
                     .bold()
-                    .foregroundStyle(task.completed ? .green.opacity(0.8) : .black)
+                    .foregroundStyle(task.completed ? .green.opacity(0.8) : .normalText)
             }.frame(maxWidth: .infinity, alignment: .leading)
             
             if showDate {

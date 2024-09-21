@@ -22,7 +22,7 @@ struct Launchscreen: View {
                 .font(.largeTitle)
             
             Text("Version \(versionNumber) build number \(buildNumber)")
-            Text("Copyright 2023. MIT")
+            Text("Copyright (c) 2024 - Alex Academia")
         }.onAppear() {
             versionNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "Cannot fetch version number."
             buildNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "Cannot fetch build number."
