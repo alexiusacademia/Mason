@@ -12,6 +12,8 @@ import SwiftData
 struct MasonApp: App {
     @State private var isActive = false
     @StateObject private var taskViewModel = TaskViewModel()
+    @StateObject private var accessibilityManager = AccessibilityManager()
+    @StateObject private var hapticManager = HapticManager()
     
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
@@ -32,16 +34,38 @@ struct MasonApp: App {
                 if isActive {
                     ContentView()
                         .environmentObject(taskViewModel)
+                        .environmentObject(accessibilityManager)
+                        .environmentObject(hapticManager)
                 } else {
-                    Launchscreen().padding(25.0)
+                    Launchscreen()
+                        .padding(25.0)
+                        .environmentObject(accessibilityManager)
+                        .environmentObject(hapticManager)
                 }
-            }.onAppear() {
+            }
+            .onAppear() {
                 // Configure the task view model with the model context
                 taskViewModel.configure(with: sharedModelContainer.mainContext)
                 
+                // Announce app launch for VoiceOver users
+                if accessibilityManager.isVoiceOverEnabled {
+                    AccessibilityUtils.announce("Mason task manager launched")
+                }
+                
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                    withAnimation {
+                    let shouldAnimate = !accessibilityManager.isReduceMotionEnabled
+                    
+                    if shouldAnimate {
+                        withAnimation(.easeInOut(duration: 0.5)) {
+                            isActive = true
+                        }
+                    } else {
                         isActive = true
+                    }
+                    
+                    // Announce screen change for accessibility
+                    if accessibilityManager.isVoiceOverEnabled {
+                        AccessibilityUtils.announceScreenChange()
                     }
                 }
             }
