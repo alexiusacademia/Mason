@@ -33,40 +33,93 @@ struct SummaryTile: View {
     @EnvironmentObject private var accessibilityManager: AccessibilityManager
     
     var body: some View {
-        VStack(spacing: 12) {
-            Text(title)
-                .font(accessibilityManager.isBoldTextEnabled ? .title.bold() : .title)
-                .fontWeight(.medium)
-                .foregroundStyle(Color.primary)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .dynamicTypeSize()
-                .lineLimit(accessibilityManager.isVoiceOverEnabled ? 0 : 2)
+        VStack(spacing: 16) {
+            // Header with icon and title
+            HStack {
+                // Icon based on title
+                Image(systemName: iconForTitle(title))
+                    .font(.system(size: 24, weight: .semibold))
+                    .foregroundColor(.white)
+                    .frame(width: 40, height: 40)
+                    .background(
+                        Circle()
+                            .fill(.white.opacity(0.2))
+                    )
+                
+                Spacer()
+                
+                // Count display
+                if let count = Int(subtitle), count > 0 {
+                    Text("\(count)")
+                        .font(.system(size: 18, weight: .bold, design: .rounded))
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 4)
+                        .background(
+                            Capsule()
+                                .fill(.white.opacity(0.2))
+                        )
+                }
+            }
             
-            Text(subtitle)
-                .font(subtitle.isInt ? 
-                      (accessibilityManager.isBoldTextEnabled ? .largeTitle.bold() : .largeTitle) :
-                      (accessibilityManager.isBoldTextEnabled ? .headline.bold() : .headline))
-                .fontWeight(.black)
-                .foregroundStyle(.primary)
-                .dynamicTypeSize()
-                .lineLimit(accessibilityManager.isVoiceOverEnabled ? 0 : 1)
+            // Title and description
+            VStack(alignment: .leading, spacing: 8) {
+                HStack {
+                    Text(title)
+                        .font(.system(size: 20, weight: .bold, design: .rounded))
+                        .foregroundColor(.white)
+                    Spacer()
+                }
+                
+                HStack {
+                    if let count = Int(subtitle), count > 0 {
+                        Text(count == 1 ? "1 task" : "\(count) tasks")
+                            .font(.system(size: 14, weight: .medium))
+                            .foregroundColor(.white.opacity(0.9))
+                    } else {
+                        Text(subtitle)
+                            .font(.system(size: 14, weight: .medium))
+                            .foregroundColor(.white.opacity(0.9))
+                    }
+                    
+                    Spacer()
+                    
+                    Image(systemName: "arrow.right")
+                        .font(.system(size: 12, weight: .semibold))
+                        .foregroundColor(.white.opacity(0.7))
+                }
+            }
         }
         .padding(20)
-        .frame(minHeight: AccessibilityConstants.preferredTouchTargetSize * 2)
+        .frame(minHeight: 120)
         .background(
             RoundedRectangle(cornerRadius: 20, style: .continuous)
-                .fill(accessibilityManager.isHighContrastEnabled ? 
-                      Color.accessibleCardBackground(isHighContrast: true) : bgColor)
-                .stroke(accessibilityManager.isHighContrastEnabled ? Color.primary : Color.clear, lineWidth: 2)
+                .fill(
+                    LinearGradient(
+                        colors: [bgColor, bgColor.opacity(0.8)],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                )
+                .shadow(color: bgColor.opacity(0.3), radius: 8, x: 0, y: 4)
         )
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(AccessibilityLabels.summaryCardLabel(
-            title: title, 
-            count: Int(subtitle) ?? 0
-        ))
-        .accessibilityHint(AccessibilityLabels.summaryCardHint())
+        .accessibilityLabel("\(title) section")
+        .accessibilityValue(subtitle)
         .accessibilityAddTraits(.isButton)
-        .accessibilityIdentifier(AccessibilityConstants.Identifiers.summaryCard)
+    }
+    
+    private func iconForTitle(_ title: String) -> String {
+        switch title.lowercased() {
+        case "today":
+            return "sun.max.fill"
+        case "previous":
+            return "clock.fill"
+        case "weekly":
+            return "calendar.badge.clock"
+        default:
+            return "list.bullet"
+        }
     }
 }
 

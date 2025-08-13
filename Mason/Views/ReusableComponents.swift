@@ -276,18 +276,24 @@ struct SummaryCard: View {
     let backgroundColor: Color
     let action: () -> Void
     
+    @EnvironmentObject private var hapticManager: HapticManager
+    
     var subtitle: String {
         count == 0 ? emptyMessage : "\(count)"
     }
     
     var body: some View {
-        Button(action: action) {
+        Button(action: {
+            hapticManager.buttonPressed()
+            action()
+        }) {
             SummaryTile(
                 title: title,
                 subtitle: subtitle,
                 bgColor: backgroundColor
             )
-            .padding()
+            .padding(.horizontal)
         }
+        .buttonStyle(PlainButtonStyle())
     }
 }
