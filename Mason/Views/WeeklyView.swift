@@ -9,58 +9,32 @@ import SwiftUI
 import SwiftData
 
 struct WeeklyView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Query private var tasks: [Task]
-    
-    @State private var items: [Task] = []
-    @State private var taskUpdated = 0
+    @EnvironmentObject var taskViewModel: TaskViewModel
     
     var body: some View {
-        NavigationStack {
-            ZStack {
-                Color.green.opacity(0.3).ignoresSafeArea()
-                
-                if items.count == 0 {
-                    Text("No tasks for this week.")
-                } else {
-                    List {
-                        ForEach(items) { task in
-                            TaskRow(task: task, showDate: true, taskChange: $taskUpdated)
-                        }.onDelete(perform: deleteItems)
-                    }.scrollContentBackground(.hidden)
-                }
-            }
-            .toolbar {
-                ToolbarItem {
-                    TopBarTitleWidget()
-                }
-            }
-            .navigationTitle("Weekly")
-        }.onAppear() {
-            updateItems()
-        }
-    }
-    
-    private func updateItems() {
-        items = []
-        
-        let currentDate = Date.now
-        let currentWeek = Calendar.current.component(.weekOfYear, from: currentDate)
-        
-        for task in tasks {
-            if Calendar.current.component(.weekOfYear, from: task.timestamp) == currentWeek {
-                items.append(task)
-            }
+        TaskViewContainer(
+            title: "Weekly",
+            backgroundColor: Color.green.opacity(0.3),
+            searchPrompt: "Search weekly tasks...",
+            searchText: Binding(
+                get: { taskViewModel.weeklySearchText },
+                set: { taskViewModel.updateWeeklySearch($0) }
+            )
+        ) {
+            TaskListView(
+                tasks: taskViewModel.filteredWeeklyTasks,
+                emptyMessage: "No tasks for this week.",
+                searchText: taskViewModel.weeklySearchText,
+                backgroundColor: Color.green.opacity(0.3),
+                showDate: true,
+                onDelete: deleteItems
+            )
         }
     }
     
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
-            for index in offsets {
-                let task = (items[index])
-                
-                modelContext.delete(task)
-            }
+            taskViewModel.deleteTasks(at: offsets, from: .weekly)
         }
     }
 }

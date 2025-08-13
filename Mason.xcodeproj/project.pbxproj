@@ -9,10 +9,16 @@
 /* Begin PBXBuildFile section */
 		5B005EE02AE0F1CB00ABDC24 /* MasonApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B005EDF2AE0F1CB00ABDC24 /* MasonApp.swift */; };
 		5B005EE22AE0F1CB00ABDC24 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B005EE12AE0F1CB00ABDC24 /* ContentView.swift */; };
-		5B005EE42AE0F1CB00ABDC24 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B005EE32AE0F1CB00ABDC24 /* Item.swift */; };
+
 		5B005EE62AE0F1CC00ABDC24 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B005EE52AE0F1CC00ABDC24 /* Assets.xcassets */; };
 		5B005EE92AE0F1CC00ABDC24 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B005EE82AE0F1CC00ABDC24 /* Preview Assets.xcassets */; };
 		5B005EF12AE0FA3C00ABDC24 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B005EF02AE0FA3C00ABDC24 /* Task.swift */; };
+		5B005EF22AE0FA3C00ABDC25 /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B005EF32AE0FA3C00ABDC26 /* TaskViewModel.swift */; };
+		5B005EF42AE0FA3C00ABDC27 /* TaskDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B005EF52AE0FA3C00ABDC28 /* TaskDataService.swift */; };
+		5B005EF82AE0FA3C00ABDC31 /* ReusableComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B005EF92AE0FA3C00ABDC32 /* ReusableComponents.swift */; };
+		5B005EFA2AE0FA3C00ABDC33 /* DesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B005EFB2AE0FA3C00ABDC34 /* DesignSystem.swift */; };
+		5B005EFC2AE0FA3C00ABDC35 /* ModernComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B005EFD2AE0FA3C00ABDC36 /* ModernComponents.swift */; };
+		5B005EFE2AE0FA3C00ABDC37 /* ModernMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B005EFF2AE0FA3C00ABDC38 /* ModernMainView.swift */; };
 		5B005EF42AE0FD6600ABDC24 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B005EF32AE0FD6600ABDC24 /* MainView.swift */; };
 		5B005EF72AE0FEF700ABDC24 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B005EF62AE0FEF700ABDC24 /* TodayView.swift */; };
 		5B67BCE82AE157D50092FDAE /* PreviousDaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B67BCE72AE157D50092FDAE /* PreviousDaysView.swift */; };
@@ -27,11 +33,17 @@
 		5B005EDC2AE0F1CB00ABDC24 /* Mason.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mason.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B005EDF2AE0F1CB00ABDC24 /* MasonApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasonApp.swift; sourceTree = "<group>"; };
 		5B005EE12AE0F1CB00ABDC24 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		5B005EE32AE0F1CB00ABDC24 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+
 		5B005EE52AE0F1CC00ABDC24 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5B005EE82AE0F1CC00ABDC24 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		5B005EEF2AE0F1FA00ABDC24 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		5B005EF02AE0FA3C00ABDC24 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		5B005EF32AE0FA3C00ABDC26 /* TaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModel.swift; sourceTree = "<group>"; };
+		5B005EF52AE0FA3C00ABDC28 /* TaskDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDataService.swift; sourceTree = "<group>"; };
+		5B005EF92AE0FA3C00ABDC32 /* ReusableComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableComponents.swift; sourceTree = "<group>"; };
+		5B005EFB2AE0FA3C00ABDC34 /* DesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem.swift; sourceTree = "<group>"; };
+		5B005EFD2AE0FA3C00ABDC36 /* ModernComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModernComponents.swift; sourceTree = "<group>"; };
+		5B005EFF2AE0FA3C00ABDC38 /* ModernMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModernMainView.swift; sourceTree = "<group>"; };
 		5B005EF32AE0FD6600ABDC24 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		5B005EF62AE0FEF700ABDC24 /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
 		5B102CB22AE603BD0055ED05 /* Mason.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Mason.entitlements; sourceTree = "<group>"; };
@@ -79,8 +91,10 @@
 				5B102CB22AE603BD0055ED05 /* Mason.entitlements */,
 				5B005EF52AE0FEAD00ABDC24 /* Views */,
 				5B005EF22AE0FA4400ABDC24 /* Models */,
+				5B005EF62AE0FA4400ABDC29 /* ViewModels */,
+				5B005EF72AE0FA4400ABDC30 /* Services */,
 				5B005EDF2AE0F1CB00ABDC24 /* MasonApp.swift */,
-				5B005EE32AE0F1CB00ABDC24 /* Item.swift */,
+
 				5B005EE52AE0F1CC00ABDC24 /* Assets.xcassets */,
 				5B005EE72AE0F1CC00ABDC24 /* Preview Content */,
 			);
@@ -103,11 +117,31 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		5B005EF62AE0FA4400ABDC29 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				5B005EF32AE0FA3C00ABDC26 /* TaskViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		5B005EF72AE0FA4400ABDC30 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				5B005EF52AE0FA3C00ABDC28 /* TaskDataService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		5B005EF52AE0FEAD00ABDC24 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				5B005EE12AE0F1CB00ABDC24 /* ContentView.swift */,
 				5B005EF32AE0FD6600ABDC24 /* MainView.swift */,
+				5B005EFF2AE0FA3C00ABDC38 /* ModernMainView.swift */,
+				5B005EF92AE0FA3C00ABDC32 /* ReusableComponents.swift */,
+				5B005EFB2AE0FA3C00ABDC34 /* DesignSystem.swift */,
+				5B005EFD2AE0FA3C00ABDC36 /* ModernComponents.swift */,
 				5B005EF62AE0FEF700ABDC24 /* TodayView.swift */,
 				5B67BCE72AE157D50092FDAE /* PreviousDaysView.swift */,
 				5B67BCE92AE15AB20092FDAE /* Widgets.swift */,
@@ -191,8 +225,14 @@
 			files = (
 				5BA624EB2AE4AFBA0062FB65 /* Launchscreen.swift in Sources */,
 				5B005EF12AE0FA3C00ABDC24 /* Task.swift in Sources */,
+				5B005EF22AE0FA3C00ABDC25 /* TaskViewModel.swift in Sources */,
+				5B005EF42AE0FA3C00ABDC27 /* TaskDataService.swift in Sources */,
+				5B005EF82AE0FA3C00ABDC31 /* ReusableComponents.swift in Sources */,
+				5B005EFA2AE0FA3C00ABDC33 /* DesignSystem.swift in Sources */,
+				5B005EFC2AE0FA3C00ABDC35 /* ModernComponents.swift in Sources */,
+				5B005EFE2AE0FA3C00ABDC37 /* ModernMainView.swift in Sources */,
 				5B005EE22AE0F1CB00ABDC24 /* ContentView.swift in Sources */,
-				5B005EE42AE0F1CB00ABDC24 /* Item.swift in Sources */,
+
 				5B005EF42AE0FD6600ABDC24 /* MainView.swift in Sources */,
 				5B005EF72AE0FEF700ABDC24 /* TodayView.swift in Sources */,
 				5B005EE02AE0F1CB00ABDC24 /* MasonApp.swift in Sources */,

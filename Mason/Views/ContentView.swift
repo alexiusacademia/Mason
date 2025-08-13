@@ -17,7 +17,7 @@ enum Tag: String {
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
+    @Query private var tasks: [Task]
     
     @State private var selectedTab = Tag.main
 
@@ -53,5 +53,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
+        .modelContainer(for: Task.self, inMemory: true)
 }

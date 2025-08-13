@@ -11,10 +11,10 @@ import SwiftData
 @main
 struct MasonApp: App {
     @State private var isActive = false
+    @StateObject private var taskViewModel = TaskViewModel()
     
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            Item.self,
             Task.self
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
@@ -31,10 +31,14 @@ struct MasonApp: App {
             VStack {
                 if isActive {
                     ContentView()
+                        .environmentObject(taskViewModel)
                 } else {
                     Launchscreen().padding(25.0)
                 }
             }.onAppear() {
+                // Configure the task view model with the model context
+                taskViewModel.configure(with: sharedModelContainer.mainContext)
+                
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                     withAnimation {
                         isActive = true

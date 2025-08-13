@@ -9,60 +9,37 @@ import SwiftUI
 import SwiftData
 
 struct PreviousDaysView: View {
-    @Query private var tasks: [Task]
-    
-    @State private var items: [Task] = []
-    @State private var taskUpdated = 0
+    @EnvironmentObject var taskViewModel: TaskViewModel
     
     var body: some View {
-        NavigationStack {
-            ZStack {
-                Color.blue.opacity(0.3).ignoresSafeArea()
-                
-                if items.count == 0 {
-                    Text("No previous prending tasks.")
-                } else {
-                    List {
-                        ForEach(items) {task in
-                            TaskRow(task: task, showDate: true, taskChange: $taskUpdated)
-                                .contextMenu(ContextMenu(menuItems: {
-                                    Button {
-                                        let today = Date.now
-                                        task.timestamp = today
-                                        
-                                        updateItems()
-                                    }label: {
-                                        Label("Move to today", systemImage: "sunrise")
-                                    }
-                                }))
-                        }
-                    }.scrollContentBackground(.hidden)
+        TaskViewContainer(
+            title: "Previous",
+            backgroundColor: Color.blue.opacity(0.3),
+            searchPrompt: "Search previous tasks...",
+            searchText: Binding(
+                get: { taskViewModel.previousSearchText },
+                set: { taskViewModel.updatePreviousSearch($0) }
+            )
+        ) {
+            TaskListView(
+                tasks: taskViewModel.filteredPreviousTasks,
+                emptyMessage: "No previous pending tasks.",
+                searchText: taskViewModel.previousSearchText,
+                backgroundColor: Color.blue.opacity(0.3),
+                showDate: true,
+                onDelete: deleteItems,
+                contextMenuProvider: { task in
+                    TaskContextMenuProvider.previousTaskMenu(task: task) { task in
+                        taskViewModel.moveTaskToToday(task)
+                    }
                 }
-            }.toolbar {
-                ToolbarItem {
-                    TopBarTitleWidget()
-                }
-            }.navigationTitle("Previous")
-        }.onAppear() {
-            updateItems()
+            )
         }
     }
     
-    private func updateItems() {
-        items = []
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd.MM.yyyy"
-        
-        let now = Date.now
-        
-        for task in tasks {
-            let taskDate = task.timestamp
-            
-            if !Calendar.current.isDateInToday(taskDate) {
-                if taskDate < now && !task.completed {
-                    items.append(task)
-                }
-            }
+    private func deleteItems(offsets: IndexSet) {
+        withAnimation {
+            taskViewModel.deleteTasks(at: offsets, from: .previous)
         }
     }
 }

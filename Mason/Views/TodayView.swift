@@ -8,102 +8,90 @@
 import SwiftUI
 import SwiftData
 
-
 struct TodayView: View {
-    @Environment(\.modelContext) private var modelContext
-    
-    @Query private var tasks: [Task]
-    
-    @State private var items: [Task] = []
+    @EnvironmentObject var taskViewModel: TaskViewModel
     @State private var showAddTaskDialog = false
-    @State private var taskUpdated = 0
     
     var body: some View {
         NavigationStack {
-            ZStack {
-                Color.orange.opacity(0.3).ignoresSafeArea()
-                
-                if items.count == 0 {
-                    Text("No activities for today.")
-                } else {
-                    List {
-                        ForEach(items) { task in
-                            TaskRow(task: task, taskChange: $taskUpdated)
-                        }
-                        .onDelete(perform: deleteItems)
-                    }.scrollContentBackground(.hidden)
-                        .onChange(of: tasks, {oldValue, newValue in
-                            withAnimation {
-                                print(tasks.count)
-                                updateItems()
-                            }
-                        })
-                        .onChange(of: taskUpdated) {old, new in
-                            withAnimation {
-                                updateItems()
-                            }
-                        }
+            VStack(spacing: 16) {
+                // Search bar
+                HStack {
+                    Image(systemName: "magnifyingglass")
+                        .foregroundColor(.secondary)
+                    
+                    TextField("Search today's tasks...", text: searchTextBinding)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
                 }
+                .padding(.horizontal)
                 
+                // Task list
+                ScrollView {
+                    LazyVStack(spacing: 12) {
+                        if taskViewModel.filteredTodayTasks.isEmpty {
+                            VStack(spacing: 16) {
+                                Image(systemName: "sun.max")
+                                    .font(.system(size: 48))
+                                    .foregroundColor(.orange)
+                                
+                                Text(emptyMessage)
+                                    .font(.title3)
+                                    .foregroundColor(.secondary)
+                                    .multilineTextAlignment(.center)
+                                
+                                if taskViewModel.todaySearchText.isEmpty {
+                                    Button("Add Task") {
+                                        showAddTaskDialog = true
+                                    }
+                                    .buttonStyle(.borderedProminent)
+                                }
+                            }
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            .padding()
+                        } else {
+                            ForEach(taskViewModel.filteredTodayTasks) { task in
+                                TaskRow(task: task, showDate: false)
+                            }
+                            .onDelete(perform: deleteItems)
+                        }
+                    }
+                    .padding(.horizontal)
+                }
             }
+            .navigationTitle("Today")
             .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    TopBarTitleWidget()
-                }
-                
-                ToolbarItem(placement: .topBarTrailing) {
+                ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
                         showAddTaskDialog = true
-                        
-                        updateItems()
-                    }label: {
+                    } label: {
                         Image(systemName: "plus")
                     }
                 }
-            }.sheet(isPresented: $showAddTaskDialog, content: {
+            }
+            .sheet(isPresented: $showAddTaskDialog) {
                 AddTaskDialogView(showMe: $showAddTaskDialog)
-            })
-            .navigationTitle("Today")
-        }
-        .onAppear() {
-            updateItems()
-        }
-        .onChange(of: showAddTaskDialog) {
-            withAnimation {
-                updateItems()
             }
         }
     }
     
-    private func updateItems() {
-        items = []
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd.MM.yyyy"
-        
-        let now = dateFormatter.string(from: Date.now)
-        
-        for task in tasks {
-            let taskDate = dateFormatter.string(from: task.timestamp)
-            
-            if taskDate == now {
-                if task.completed {
-                    items.append(task)
-                } else {
-                    items.insert(task, at: 0)
-                }
-            }
+    private var searchTextBinding: Binding<String> {
+        Binding(
+            get: { taskViewModel.todaySearchText },
+            set: { taskViewModel.updateTodaySearch($0) }
+        )
+    }
+    
+    private var emptyMessage: String {
+        if taskViewModel.todaySearchText.isEmpty {
+            return "No tasks for today.\nTap the + button to add one!"
+        } else {
+            return "No tasks found for '\(taskViewModel.todaySearchText)'"
         }
-        
     }
     
     private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                let task = (items[index])
-                
-                modelContext.delete(task)
-            }
+        withAnimation(MasonAnimations.smooth) {
+            taskViewModel.deleteTasks(at: offsets, from: .today)
         }
     }
 }

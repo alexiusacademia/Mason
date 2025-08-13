@@ -27,9 +27,9 @@ extension String {
 }
 
 struct SummaryTile: View {
-    @State var title: String
-    @Binding var subtitle: String
-    @State var bgColor: Color
+    let title: String
+    let subtitle: String
+    let bgColor: Color
     
     var body: some View {
         VStack {
@@ -55,23 +55,40 @@ struct SummaryTile: View {
 
 struct TaskRow: View {
     @Bindable var task: Task
-    @State var showDate = false
-    @State var date = ""
-    @Binding var taskChange: Int
+    let showDate: Bool
+    @State private var date = ""
+    @State private var showEditDialog = false
+    
+    init(task: Task, showDate: Bool = false) {
+        self.task = task
+        self.showDate = showDate
+    }
     
     var body: some View {
         VStack {
             HStack {
                 Button {
                     task.completed = !task.completed
-                    taskChange += 1
-                }label: {
+                    // SwiftData will automatically update all views using this task
+                } label: {
                     Image(systemName: task.completed ? "checkmark.square" : "square")
                 }
                 
                 Text(task.taskName)
                     .bold()
                     .foregroundStyle(task.completed ? .green.opacity(0.8) : .normalText)
+                
+                Spacer()
+                
+                // Edit button
+                Button {
+                    showEditDialog = true
+                } label: {
+                    Image(systemName: "pencil")
+                        .foregroundColor(.blue)
+                        .font(.caption)
+                }
+                .buttonStyle(PlainButtonStyle())
             }.frame(maxWidth: .infinity, alignment: .leading)
             
             if showDate {
@@ -82,10 +99,12 @@ struct TaskRow: View {
             }
         }
         .onAppear() {
-            
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "MMM dd, yyyy"
             date = dateFormatter.string(from: task.timestamp)
+        }
+        .sheet(isPresented: $showEditDialog) {
+            EditTaskDialogView(task: task, showMe: $showEditDialog)
         }
     }
 }
